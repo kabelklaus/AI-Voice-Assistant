@@ -1,15 +1,4 @@
-*flask*
-*.html
-*.css
-*.js
-venv/
-static/
-templates/
-sonst/
-*copy*
-*.png
-*.jpg
 *pycache*
 *.pyc
 .env
-app.py
+backup/
