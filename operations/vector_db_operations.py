@@ -19,25 +19,28 @@ def save_user_info(astra_db, user_id, info_type, value):
     LIGHT_GRAY = "\033[1m"
     RESET = "\033[0m"
     
-    existing_info = get_user_info(astra_db, user_id, info_type)
-    if existing_info:
-        # If information exists, update it instead of creating a new entry
-        metadata = {
-            "user_id": user_id,
-            "info_type": info_type,
-            "value": value,
-            "timestamp": datetime.now().isoformat()
-        }
-        astra_db.update_texts([f"{info_type}: {value}"], [metadata], filter={"user_id": user_id, "info_type": info_type})
+    # Suche nach existierenden Einträgen
+    existing_entries = astra_db.similarity_search_with_score(
+        f"user_id:{user_id} info_type:{info_type}",
+        k=1,
+        filter={"user_id": user_id, "info_type": info_type}
+    )
+    
+    # Erstelle die Metadaten
+    metadata = {
+        "user_id": user_id,
+        "info_type": info_type,
+        "value": value,
+        "timestamp": datetime.now().isoformat()
+    }
+    
+    if existing_entries:
+        # Wenn Information existiert, füge einen neuen Eintrag hinzu
+        # (AstraDB unterstützt keine direkte Aktualisierung oder Löschung mit Filter)
+        astra_db.add_texts([f"{info_type}: {value}"], [metadata])
         action = "Updated"
     else:
-        # If it's new information, save it as before
-        metadata = {
-            "user_id": user_id,
-            "info_type": info_type,
-            "value": value,
-            "timestamp": datetime.now().isoformat()
-        }
+        # Wenn es keine existierende Information gibt, füge einfach einen neuen Eintrag hinzu
         astra_db.add_texts([f"{info_type}: {value}"], [metadata])
         action = "Saved"
     

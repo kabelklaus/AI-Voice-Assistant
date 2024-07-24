@@ -1,4 +1,4 @@
-# German AI Assistant with RAG
+# German AI Voice Assistant with RAG
 
 This project implements a German-speaking AI assistant using Retrieval-Augmented Generation (RAG) with LangChain, Groq API, and AstraDB for vector storage.
 
