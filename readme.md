@@ -50,7 +50,7 @@ To extend the assistant's capabilities, you can add new skills:
 2. Implement the skill's functionality.
 3. Import and integrate the new skill in `main.py`.
 
-## Future Development
+## Roadmap
 
 - [ ] We are considering switching from AstraDB to ChromaDB for vector storage. For more privacy.
 - [ ] More skills will be added to enhance the assistant's capabilities.
