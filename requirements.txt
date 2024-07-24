@@ -1,0 +1,13 @@
+langchain
+python-dotenv
+langchain_community 
+chromadb
+groq
+ollama
+langchain-groq
+langchain-openai
+langchain-astradb
+gtts
+pygame
+SpeechRecognition
+pyaudio
