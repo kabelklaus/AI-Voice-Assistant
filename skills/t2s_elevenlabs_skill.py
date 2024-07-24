@@ -11,7 +11,7 @@ load_dotenv()
 
 # ElevenLabs API-Key und Voice-ID aus Umgebungsvariablen laden
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
-VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "8fTCePfuLBoIiKtjn4GU")  # Fallback zur vorgegebenen Voice-ID
+VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID")
 
 # Text-to-speech Funktion
 def spreche_text(text):

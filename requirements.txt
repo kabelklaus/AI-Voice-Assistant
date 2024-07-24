@@ -1,11 +1,9 @@
 langchain
 python-dotenv
-langchain_community 
-chromadb
+langchain_community
 groq
 ollama
 langchain-groq
-langchain-openai
 langchain-astradb
 gtts
 pygame

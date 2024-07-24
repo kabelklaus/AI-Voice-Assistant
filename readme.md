@@ -4,7 +4,7 @@ This project implements a German-speaking AI assistant using Retrieval-Augmented
 
 ## Features
 
-- Uses Groq API with the Llama3 70b model
+- Uses Groq API with the llama-3.1-70b-versatile
 - Implements LangChain for data management and processing
 - Utilizes AstraDB for chat history storage (may switch to ChromaDB in the future)
 - Employs nomic-embed-text:latest from Ollama for embeddings
@@ -14,7 +14,7 @@ This project implements a German-speaking AI assistant using Retrieval-Augmented
 
 ## Prerequisites
 
-- Python 3.8+
+- Python 3.8+ (I use 3.11)
 - Groq API access
 - AstraDB account (https://astra.datastax.com/)
 - Ollama running locally

@@ -1,4 +1,6 @@
 *pycache*
 *.pyc
+*.mp3
 .env
 backup/
+.venv
