@@ -134,8 +134,11 @@ def chat(user_input):
     
     context += "\nPast context (sorted by relevance and recency):\n"
     for info in past_info:
-        context += f"{info['metadata']['sender']} ({info['metadata']['timestamp']}): {info['content']} (Relevance: {info['score']:.2f})\n"
-
+        sender = info['metadata'].get('sender', info['metadata'].get('info_type', 'Unbekannt'))
+        timestamp = info['metadata'].get('timestamp', 'Kein Zeitstempel')
+        content = info['content'] if 'content' in info else f"{info['metadata'].get('info_type', 'Info')}: {info['metadata'].get('value', 'Unbekannt')}"
+        context += f"{sender} ({timestamp}): {content} (Relevance: {info['score']:.2f})\n"
+        
     # Generate inner monologue
     monologue = inner_monologue_agent.generate_inner_monologue(user_input, context)
     print(f"\n💭{ITALIC}{LIGHT_GRAY} Inner Monologue: {monologue}{RESET}\n")

@@ -9,7 +9,7 @@ def initialize_astra_db(embeddings, token, api_endpoint):
         token=token,
         api_endpoint=api_endpoint,
         namespace="default_keyspace",
-        collection_name="chatmemory2",
+        collection_name="chatmemory",
         embedding=embeddings
     )
 
