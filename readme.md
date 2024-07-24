@@ -52,8 +52,43 @@ To extend the assistant's capabilities, you can add new skills:
 
 ## Future Development
 
-- We are considering switching from AstraDB to ChromaDB for vector storage.
-- More skills will be added to enhance the assistant's capabilities.
+- [ ] We are considering switching from AstraDB to ChromaDB for vector storage. For more privacy.
+- [ ] More skills will be added to enhance the assistant's capabilities.
+- [ ] Regular database cleaning
+  - Implement a cleaning strategy while preserving entries with "info_type" in metadata
+  - Cleaning methods to consider:
+    - [ ] Time-based cleaning
+    - [ ] Redundancy removal
+    - [ ] Context cleaning
+    - [ ] Frequency-based cleaning
+    - [ ] Size limitation
+
+### Database Cleaning Strategy
+
+Our database cleaning strategy will focus on maintaining relevant information while optimizing storage and performance. Here's a breakdown of our approach:
+
+1. Time-based Cleaning:
+   - Remove older entries not marked as user information (no "info_type" in metadata)
+   - E.g., delete entries older than 30 days that aren't saved user information
+
+2. Redundancy Removal:
+   - Identify very similar entries (high similarity in embeddings)
+   - Keep only the most recent entry
+   - Exclude entries with "info_type" in metadata from this process
+
+3. Context Cleaning:
+   - Remove context information from past conversations that's no longer relevant
+   - Always retain the most important or frequently accessed information
+
+4. Frequency-based Cleaning:
+   - Remove entries that are rarely or never retrieved, except those with an "info_type"
+
+5. Size Limitation:
+   - Implement a maximum number of entries or maximum database size
+   - When the limit is reached, remove the oldest entries (excluding "info_type" entries)
+
+This strategy will help us maintain a clean, efficient database while preserving crucial user information.
+
 
 ## Contributing
 
