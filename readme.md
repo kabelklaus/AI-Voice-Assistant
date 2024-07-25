@@ -100,6 +100,18 @@ To extend the assistant's capabilities, you can add new skills:
 1. Create a new Python file in the `skills` directory (e.g., `new_skill.py`).
 2. Implement the skill's functionality.
 3. Import and integrate the new skill in `main.py`.
+4. Add the skill to the `response_prompt.py` file to make the LLM aware of it. Include an example of how to use the skill to help the LLM better understand and utilize it.
+
+Example addition to `response_prompt.py`:
+
+```python
+If the user asks about the weather, respond with:
+FUNCTION_CALL: get_weather(location)
+For example:
+- If the user asks "Wie ist das Wetter in Berlin?", respond with:
+FUNCTION_CALL: get_weather("Berlin")
+```
+This will ensure that the LLM knows how to use the new skill and can incorporate it into its responses.
 
 ## Roadmap
 

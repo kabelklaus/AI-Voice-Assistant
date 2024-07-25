@@ -1,6 +1,13 @@
 *pycache*
 *.pyc
-*.mp3
+*.bin
+antwort.mp3
+*.sqlite3
 .env
 backup/
+chroma_db/
 .venv
+*test*
+
+# temporär rausgenommen:
+clean_vectordb.py 
