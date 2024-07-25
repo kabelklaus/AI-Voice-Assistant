@@ -5,6 +5,7 @@ groq
 ollama
 langchain-groq
 langchain-astradb
+langchain_chroma
 gtts
 pygame
 SpeechRecognition
