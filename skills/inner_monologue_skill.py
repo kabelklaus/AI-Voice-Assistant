@@ -14,7 +14,7 @@ class InnerMonologueAgent:
                 As an AI assistant, analyze the following user message and context. 
                 Generate a brief inner monologue (max 50 words) that reflects your thoughts and considerations for the next step. 
                 Consider the conversation history and maintain continuity. 
-                Respond only in German and use the "Du" format to address the user.
+                Respond only in German.
                 """
             ),
             HumanMessagePromptTemplate.from_template(
@@ -36,7 +36,7 @@ class InnerMonologueAgent:
                 Each action should be a single, clear sentence describing what the chatbot should do or say. 
                 Do not include numbering, 'Geplante Aktionen:', or any other prefixes. 
                 Do not include actions like 'Wait for user input' as these are implied. 
-                Respond only in German and use the "Du" format to address the user.
+                Respond only in German.
                 """
             ),
             HumanMessagePromptTemplate.from_template(

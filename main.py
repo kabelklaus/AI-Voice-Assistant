@@ -14,8 +14,9 @@ import sys
 from datetime import datetime
 
 
-# Importiere die Funktionen
-from operations.vector_db_astra_operations import *
+# Importiere die Funktionen für die VectorDB
+# from operations.vector_db_astra_operations import *
+from operations.vector_db_chroma_operations import *
 
 # Sprache
 from skills.t2s_elevenlabs_skill import spreche_text
@@ -64,10 +65,16 @@ embeddings = OllamaEmbeddings(
 )
 
 # Initialize AstraDB
+# vector_db = initialize_vector_db(
+#     embeddings,
+#     os.getenv("vector_db_APPLICATION_TOKEN"),
+#     os.getenv("vector_db_API_ENDPOINT")
+# )
+
+# Initialize Chroma
 vector_db = initialize_vector_db(
     embeddings,
-    os.getenv("vector_db_APPLICATION_TOKEN"),
-    os.getenv("vector_db_API_ENDPOINT")
+    persist_directory="./chroma_db"
 )
 
 # Initialize text splitter 
