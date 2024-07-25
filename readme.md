@@ -1,6 +1,6 @@
 # German AI Voice Assistant with RAG
 
-This project implements a German-speaking AI assistant using Retrieval-Augmented Generation (RAG) with LangChain, Groq API, and AstraDB for vector storage.
+This project implements a German-speaking AI assistant using Retrieval-Augmented Generation (RAG) with LangChain, Groq API, and Chroma for vector storage.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ This project implements a German-speaking AI assistant using Retrieval-Augmented
 
 - Uses Groq API with the llama-3.1-70b-versatile
 - Implements LangChain for data management and processing
-- Utilizes AstraDB for chat history storage (may switch to ChromaDB in the future)
+- Utilizes Chroma for chat history storage
 - Employs nomic-embed-text:latest from Ollama for embeddings
 - Implements text chunking for efficient processing
 - Allows user interaction through text or speech input
@@ -30,7 +30,7 @@ This project implements a German-speaking AI assistant using Retrieval-Augmented
 
 - Python 3.8+ (I use 3.11)
 - Groq API access
-- AstraDB account (https://astra.datastax.com/)
+- Chroma
 - Ollama running locally
 
 ## Installation
@@ -115,7 +115,7 @@ This will ensure that the LLM knows how to use the new skill and can incorporate
 
 ## Roadmap
 
-- [ ] We are considering switching from AstraDB to ChromaDB for vector storage. For more privacy.
+- [x] We are considering switching from AstraDB to ChromaDB for vector storage. For more privacy.
 - [ ] More skills will be added to enhance the assistant's capabilities.
 - [ ] Regular database cleaning
   - Implement a cleaning strategy while preserving entries with "info_type" in metadata
