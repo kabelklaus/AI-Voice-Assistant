@@ -15,11 +15,11 @@ from datetime import datetime
 
 
 # Importiere die Funktionen
-from operations.vector_db_operations import *
+from operations.vector_db_astra_operations import *
 
 # Sprache
-# from skills.t2s_elevenlabs_skill import spreche_text
-from skills.t2s_gtts_skill import spreche_text
+from skills.t2s_elevenlabs_skill import spreche_text
+# from skills.t2s_gtts_skill import spreche_text
 
 # Skills
 from skills.clock_skill import get_current_time
@@ -36,18 +36,20 @@ from operations.response_prompt import RESPONSE_PROMPT
 load_dotenv()
 
 # Initialize Groq LLM llama-3.1-70b-versatile
-llm = ChatGroq(
-    api_key=os.getenv("GROQ_API_KEY"),
-    temperature=0.3,
-    model_name="llama-3.1-70b-versatile"
-)
-
-# Initialize Groq LLM llama3-70b-8192
 # llm = ChatGroq(
 #     api_key=os.getenv("GROQ_API_KEY"),
 #     temperature=0.3,
-#     model_name="llama3-70b-8192"
+#     max_tokens=1024,
+#     model_name="llama-3.1-70b-versatile"
 # )
+
+# Initialize Groq LLM llama3-70b-8192
+llm = ChatGroq(
+    api_key=os.getenv("GROQ_API_KEY"),
+    temperature=0.3,
+    max_tokens=1024,
+    model_name="llama3-70b-8192"
+)
 
 # # Initialize Ollama
 # llm = ChatOllama(
@@ -62,10 +64,10 @@ embeddings = OllamaEmbeddings(
 )
 
 # Initialize AstraDB
-astra_db = initialize_astra_db(
+vector_db = initialize_vector_db(
     embeddings,
-    os.getenv("ASTRA_DB_APPLICATION_TOKEN"),
-    os.getenv("ASTRA_DB_API_ENDPOINT")
+    os.getenv("vector_db_APPLICATION_TOKEN"),
+    os.getenv("vector_db_API_ENDPOINT")
 )
 
 # Initialize text splitter 
@@ -99,8 +101,8 @@ function_calls = {
     "get_current_date": get_current_date,
     "get_current_week": get_current_week,
     "get_current_day": get_current_day,
-    "save_user_info": lambda *args: save_user_info(astra_db, *args),
-    "get_user_info": lambda *args: get_user_info(astra_db, *args),
+    "save_user_info": lambda *args: save_user_info(vector_db, *args),
+    "get_user_info": lambda *args: get_user_info(vector_db, *args),
 }
 
 def add_message_with_timestamp(memory, message_type, content):
@@ -124,7 +126,7 @@ def chat(user_input):
     conversation_history = memory.chat_memory.messages
 
     # Retrieve relevant past information
-    past_info = retrieve_from_vectordb(astra_db, user_input)
+    past_info = retrieve_from_vectordb(vector_db, user_input)
     
     # Format past information and conversation history
     context = "Conversation history:\n"
@@ -244,7 +246,7 @@ while True:
         break
     
     # Store the user input with metadata
-    add_to_vectordb(astra_db, user_input, "User", text_splitter)
+    add_to_vectordb(vector_db, user_input, "User", text_splitter)
 
     
     response = chat(user_input)
@@ -252,4 +254,4 @@ while True:
     spreche_text(response)
 
     # Store the AI response with metadata
-    add_to_vectordb(astra_db, response, "AI", text_splitter)
+    add_to_vectordb(vector_db, response, "AI", text_splitter)

@@ -50,7 +50,7 @@ def spreche_text(text):
             
             # Warten, bis das Abspielen abgeschlossen ist
             while pygame.mixer.music.get_busy():
-                pygame.time.Clock().tick(10)
+                pygame.time.Clock().tick(1)
             
             # Warten Sie kurz, bevor Sie die Datei löschen
             time.sleep(1)

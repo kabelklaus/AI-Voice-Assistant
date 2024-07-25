@@ -1,14 +1,23 @@
 # s2t_skill.py
 
 import speech_recognition as sr
+import pygame
+import os
 
-def get_audio_input():
+def initialize_sound():
+    pygame.mixer.init()
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    sound_file = os.path.join(script_dir, '..', 'ping.mp3')
+    return pygame.mixer.Sound(sound_file)
+
+def get_audio_input(ping_sound):
     recognizer = sr.Recognizer()
     
     with sr.Microphone() as source:
         print("Bitte sprechen Sie jetzt...")
         recognizer.adjust_for_ambient_noise(source, duration=1)
         print("Ich höre zu...")
+        ping_sound.play()  # Spiele den Ping-Sound ab
         try:
             audio = recognizer.listen(source, timeout=5, phrase_time_limit=10)
             print("Spracherkennung läuft...")
@@ -28,8 +37,9 @@ def get_audio_input():
         return None
 
 def continuous_audio_input():
+    ping_sound = initialize_sound()
     while True:
-        result = get_audio_input()
+        result = get_audio_input(ping_sound)
         if result:
             return result
         print("Versuchen Sie es bitte erneut.")
