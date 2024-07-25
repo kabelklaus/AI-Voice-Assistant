@@ -2,6 +2,20 @@
 
 This project implements a German-speaking AI assistant using Retrieval-Augmented Generation (RAG) with LangChain, Groq API, and AstraDB for vector storage.
 
+## Table of Contents
+
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [MacOS Users: Installing PyAudio](#macos-users-installing-pyaudio)
+- [Downloading Ollama Embedding Model](#downloading-ollama-embedding-model)
+- [Usage](#usage)
+- [Adding New Skills](#adding-new-skills)
+- [Roadmap](#roadmap)
+  - [Database Cleaning Strategy](#database-cleaning-strategy)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Features
 
 - Uses Groq API with the llama-3.1-70b-versatile
@@ -22,24 +36,61 @@ This project implements a German-speaking AI assistant using Retrieval-Augmented
 ## Installation
 
 1. Clone the repository:
-git clone https://github.com/yourusername/german-ai-assistant.git
-cd german-ai-assistant
-Copy
+```bash
+git clone https://github.com/kabelklaus/AI-Voice-Assistant.git
+cd AI-Voice-Assistant
+```
 2. Install the required packages:
+```bash
 pip install -r requirements.txt
-Copy
+```
 3. Rename `.env_example` to `.env` and fill in your API keys and other configuration details:
+```bash
 mv .env_example .env
-Copy
+```
 4. Edit the `.env` file with your specific credentials and settings.
+
+## MacOS Users: Installing PyAudio
+
+If you're using a Mac and need to install PyAudio, follow these steps:
+
+1. Install Xcode from the App Store and restart your computer.
+2. Run the following commands in sequence:
+
+```bash
+xcode-select --install
+brew remove portaudio
+brew install portaudio
+pip3 install pyaudio
+```
+Note: Xcode command line tools are required for some installations. Homebrew requires Xcode, so you can also just run:
+```bash
+xcode-select --install
+```
+
+## Downloading Ollama Embedding Model
+
+This project uses the `nomic-embed-text:latest` model from Ollama for embeddings. To download this model:
+
+1. Ensure Ollama is installed on your system. If not, follow the installation instructions at [Ollama's official website](https://ollama.com/).
+2. Open a terminal or command prompt.
+3. Run the following command to download the model:
+```bash
+ollama pull nomic-embed-text:latest
+```
+This command will download and install the latest version of the `nomic-embed-text` model.
+4. Wait for the download to complete. The model size is approximately 670MB, so it may take a few minutes depending on your internet connection.
+
+Once the model is downloaded, Ollama will automatically use it for generating embeddings in this project.
 
 ## Usage
 
 1. Ensure Ollama is running locally for embeddings.
 
 2. Run the main script:
+```bash
 python main.py
-Copy
+```
 3. Follow the prompts to interact with the AI assistant. You can choose between text or speech input.
 
 ## Adding New Skills
