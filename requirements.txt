@@ -1,0 +1,15 @@
+langchain
+python-dotenv
+langchain_community
+groq
+ollama
+langchain-groq
+langchain-astradb
+langchain_chroma
+deepgram-sdk
+gtts
+pygame
+SpeechRecognition
+google-search-results
+openai
+pyaudio
